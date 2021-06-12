@@ -1,13 +1,17 @@
 tw_git_home() {
   local tw_current_directory="$1"
   local tw_git_toplevel="$2"
+  local tw_squash="$3"
   local tw_git_home=""
+
   if [ "$tw_git_toplevel" != "" -a "$tw_git_toplevel" != "$tw_current_directory" ]; then
     local tw_repo_name=`basename $tw_git_toplevel`
     tw_git_home="$tw_repo_name"
   fi;
-  if [ "$tw_git_home" != "" ]; then
-    # check how many directories are between
+
+  if [ "$tw_git_home" != "" && "$tw_squash" == "1" ]; then
+    
+    # Check how many directories are between
     local tw_current_nesting="${tw_current_directory//[^\/]}"
     local tw_repo_nesting="${tw_git_toplevel//[^\/]}"
     local tw_diff=`expr ${#tw_current_nesting} - ${#tw_repo_nesting}`
@@ -16,8 +20,13 @@ tw_git_home() {
     else
       echo "$tw_git_home/.../"
     fi;
+
+  elif [[ "$tw_git_home" != "" ]]; then
+    local tw_path="${tw_current_directory##${tw_git_toplevel}}" 
+    echo "$tw_repo_name$tw_path"
   else
-    echo ""
+    echo `basename $tw_current_directory`
+  
   fi;
 }
 
