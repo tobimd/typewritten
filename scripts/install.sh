@@ -29,7 +29,7 @@ fi
 # ------------------------------------------------------------------------------
 
 ZSHRC="${ZDOTDIR:-$HOME}/.zshrc"
-REPO='https://github.com/reobin/typewritten.git'
+REPO='https://github.com/tobimd/typewritten.git'
 
 SOURCE="$PWD/typewritten.zsh"
 ASYNC_SOURCE="$PWD/async.zsh"
