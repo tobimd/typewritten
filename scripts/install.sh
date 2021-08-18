@@ -94,13 +94,8 @@ main() {
     error "Failed to symlink $SOURCE to $DEST."
     error "Failed to symlink $ASYNC_SOURCE to $DEST."
     
-    warn "Attempting to create directory $DEST and symlink."
-    mkdir -p $DEST
-    
-    if [[ ! -w "$DEST" ]]; then
-      error "Failed, resorting to use $USER_DEST."
-      DEST="$USER_DEST"
-    fi
+    info "Using $USER_DEST instead."
+    DEST="$USER_DEST"
 
     info "Adding $DEST to fpath..."
     echo 'fpath=($fpath "'"$DEST"'")' >> "$ZSHRC"
