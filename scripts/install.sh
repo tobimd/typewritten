@@ -33,7 +33,7 @@ REPO='https://github.com/tobimd/typewritten.git'
 
 SOURCE="$PWD/typewritten.zsh"
 ASYNC_SOURCE="$PWD/async.zsh"
-USER_SOURCE="${ZDOTDIR:-$HOME}/.typewritten-prompt"
+USER_SOURCE="${ZDOTDIR:-$HOME}/.oh-my-zsh/custom/themes/typewritten-prompt"
 
 DEST='/usr/local/share/zsh/site-functions'
 USER_DEST="${ZDOTDIR:-$HOME}/.zfunctions"
@@ -93,9 +93,14 @@ main() {
   if [[ ! -w "$DEST" ]]; then
     error "Failed to symlink $SOURCE to $DEST."
     error "Failed to symlink $ASYNC_SOURCE to $DEST."
-
-    # Use $USER_DEST instead
-    DEST="$USER_DEST"
+    
+    warn "Attempting to create directory $DEST and symlink."
+    mkdir -p $DEST
+    
+    if [[ ! -w "$DEST" ]]; then
+      error "Failed, resorting to use $USER_DEST."
+      DEST="$USER_DEST"
+    fi
 
     info "Adding $DEST to fpath..."
     echo 'fpath=($fpath "'"$DEST"'")' >> "$ZSHRC"
