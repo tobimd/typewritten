@@ -33,7 +33,7 @@ REPO='https://github.com/tobimd/typewritten.git'
 
 SOURCE="$PWD/typewritten.zsh"
 ASYNC_SOURCE="$PWD/async.zsh"
-USER_SOURCE="${ZDOTDIR:-$HOME}/.oh-my-zsh/custom/themes/typewritten-prompt"
+USER_SOURCE="${ZDOTDIR:-$HOME}/.oh-my-zsh/custom/typewritten-prompt"
 
 DEST='/usr/local/share/zsh/site-functions'
 USER_DEST="${ZDOTDIR:-$HOME}/.zfunctions"
