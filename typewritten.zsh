@@ -175,6 +175,8 @@ tw_redraw() {
       RPROMPT="$tw_git_arrow_info"
     fi
 
+  fi
+
   zle -R && zle reset-prompt
 }
 
