@@ -28,7 +28,7 @@
   </a>
   <a href="#contributors">
     <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-    <img src="https://img.shields.io/badge/all_contributors-27-orange.svg?style=flat-square" alt="All contributors" />
+    <img src="https://img.shields.io/badge/all_contributors-32-orange.svg?style=flat-square" alt="All contributors" />
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
   </a>
 </p>
@@ -38,6 +38,8 @@
 </p>
 
 > Terminal is [iTerm2](https://iterm2.com/) — Font is [JetBrains Mono](https://www.jetbrains.com/lp/mono/) — Terminal theme is [Seoul256](https://github.com/junegunn/seoul256.vim)
+>
+> See how to make your terminal look exactly like the demo [here](https://github.com/reobin/typewritten/discussions/128)
 
 ## Features
 
@@ -144,6 +146,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/CrystalJewell"><img src="https://avatars.githubusercontent.com/u/21298255?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Crystal Adkins</b></sub></a><br /><a href="https://github.com/reobin/typewritten/commits?author=CrystalJewell" title="Code">💻</a> <a href="#ideas-CrystalJewell" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://github.com/juanCortelezzi"><img src="https://avatars.githubusercontent.com/u/57237705?v=4?s=100" width="100px;" alt=""/><br /><sub><b>J.B.C</b></sub></a><br /><a href="https://github.com/reobin/typewritten/issues?q=author%3AjuanCortelezzi" title="Bug reports">🐛</a> <a href="https://github.com/reobin/typewritten/commits?author=juanCortelezzi" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/jeevatattva"><img src="https://avatars.githubusercontent.com/u/26855245?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jeeva K</b></sub></a><br /><a href="https://github.com/reobin/typewritten/issues?q=author%3Ajeevatattva" title="Bug reports">🐛</a> <a href="#ideas-jeevatattva" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/subhajit-halder"><img src="https://avatars.githubusercontent.com/u/54535412?v=4?s=100" width="100px;" alt=""/><br /><sub><b>awakened</b></sub></a><br /><a href="#ideas-subhajit-halder" title="Ideas, Planning, & Feedback">🤔</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/spamwax"><img src="https://avatars.githubusercontent.com/u/1251233?v=4?s=100" width="100px;" alt=""/><br /><sub><b>spamwax</b></sub></a><br /><a href="#ideas-spamwax" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://austinray.io"><img src="https://avatars.githubusercontent.com/u/1640737?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Austin Ray</b></sub></a><br /><a href="https://github.com/reobin/typewritten/commits?author=Austin-Ray" title="Code">💻</a> <a href="https://github.com/reobin/typewritten/issues?q=author%3AAustin-Ray" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/Pound-Hash"><img src="https://avatars.githubusercontent.com/u/51193876?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alan</b></sub></a><br /><a href="https://github.com/reobin/typewritten/issues?q=author%3APound-Hash" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="http://vedantnandwana.me"><img src="https://avatars.githubusercontent.com/u/70624701?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vedant Nandwana</b></sub></a><br /><a href="https://github.com/reobin/typewritten/commits?author=vedantnn71" title="Documentation">📖</a></td>
   </tr>
 </table>
 

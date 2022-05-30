@@ -44,7 +44,21 @@ tw_prompt="$tw_prompt_color$tw_return_code$tw_prompt_symbol %F{$tw_colors[prompt
 tw_current_directory_color="$tw_colors[current_directory]"
 tw_git_branch_color="$tw_colors[git_branch]"
 
-tw_arrow="%F{$tw_colors[arrow]}->"
+local tw_arrow_symbol="->"
+if [ ! -z "$TYPEWRITTEN_ARROW_SYMBOL" ]; then
+  tw_arrow_symbol="$TYPEWRITTEN_ARROW_SYMBOL"
+fi;
+tw_arrow="%F{$tw_colors[arrow]}$tw_arrow_symbol"
+
+local tw_branch_left_symbol=" $tw_arrow "
+local tw_branch_right_symbol=""
+if [ ! -z "$TYPEWRITTEN_BRANCH_LEFT_SYMBOL" ]; then
+  tw_branch_left_symbol="%F{$tw_colors[git_enclosing_symbol]}$TYPEWRITTEN_BRANCH_LEFT_SYMBOL"
+fi;
+
+if [ ! -z "$TYPEWRITTEN_BRANCH_RIGHT_SYMBOL" ]; then
+  tw_branch_right_symbol="%F{$tw_colors[git_enclosing_symbol]}$TYPEWRITTEN_BRANCH_RIGHT_SYMBOL"
+fi;
 
 local tw_branch_left_symbol=" $tw_arrow "
 local tw_branch_right_symbol=""
@@ -93,9 +107,8 @@ tw_get_displayed_wd() {
 
   local tw_displayed_wd="$tw_git_relative_wd"
     
-
   # The pure layout defaults to home relative working directory, but allows customization
-  if [[ "$TYPEWRITTEN_PROMPT_LAYOUT" = "pure" && "$TYPEWRITTEN_RELATIVE_PATH" = "" ]]; then
+  if [[ "$TYPEWRITTEN_PROMPT_LAYOUT" = pure* && "$TYPEWRITTEN_RELATIVE_PATH" = "" ]]; then
     tw_displayed_wd=$tw_home_relative_wd
   fi;
 
@@ -120,7 +133,6 @@ tw_redraw() {
   tw_layout="$TYPEWRITTEN_PROMPT_LAYOUT"
   tw_git_info="$tw_prompt_data[tw_git_branch]$tw_prompt_data[tw_git_status]"
 
-  # LAYOUT = HALF_PURE
   if [ "$tw_layout" = "half_pure" ]; then
     PROMPT="$BREAK_LINE%F{$tw_git_branch_color}$tw_git_info$BREAK_LINE$tw_env_prompt"
     RPROMPT="$tw_right_prompt_prefix$tw_displayed_wd"
@@ -129,38 +141,39 @@ tw_redraw() {
     local tw_git_arrow_info=""
     if [ "$tw_git_info" != "" ]; then
       tw_git_arrow_info="$tw_branch_left_symbol%F{$tw_git_branch_color}$tw_git_info$tw_branch_right_symbol"
-    fi;
+    fi
 
-    # LAYOUT = PURE
+    PROMPT="$tw_env_prompt"
+    RPROMPT="$tw_right_prompt_prefix$tw_displayed_wd$tw_git_arrow_info"
+
     if [ "$tw_layout" = "pure" ]; then
       PROMPT="$BREAK_LINE$tw_displayed_wd$tw_git_arrow_info$BREAK_LINE$tw_env_prompt"
       RPROMPT=""
+    fi
 
-    # LAYOUT = SPLIT
-    elif [ "$tw_layout" = "split" ]; then
-      PROMPT="$BREAK_LINE$tw_displayed_wd$BREAK_LINE$tw_env_prompt"
-      RPROMPT="$tw_git_arrow_info"
+    if [ "$tw_layout" = "pure_verbose" ]; then
+      PROMPT="$BREAK_LINE$tw_user_host $tw_displayed_wd$tw_git_arrow_info$BREAK_LINE$tw_env_prompt"
+      RPROMPT=""
+    fi
 
-    # LAYOUT = SINGLELINE_SPLIT
-    elif [ "$tw_layout" = "singleline_split" ]; then
-      PROMPT="$tw_displayed_wd $tw_env_prompt"
-      RPROMPT="$tw_git_arrow_info"
-
-    else
-
-      # LAYOUT = SINGLELINE_VERBOSE
-      if [ "$tw_layout" = "singleline_verbose" ]; then
-        PROMPT="$tw_user_host $tw_env_prompt"
-
-      # LAYOUT = MULTILINE
-      elif [ "$tw_layout" = "multiline" ]; then
-        PROMPT="$BREAK_LINE$tw_user_host$BREAK_LINE$tw_env_prompt"
-      else
-        PROMPT="$tw_env_prompt"
-      fi;
+    if [ "$tw_layout" = "singleline_verbose" ]; then
+      PROMPT="$tw_user_host $tw_env_prompt"
       RPROMPT="$tw_right_prompt_prefix$tw_displayed_wd$tw_git_arrow_info"
     fi;
-  fi;
+
+    if [ "$tw_layout" = "multiline" ]; then
+      PROMPT="$BREAK_LINE$tw_user_host$BREAK_LINE$tw_env_prompt"
+    fi
+
+    if [ "$tw_layout" = "split" ]; then
+      PROMPT="$BREAK_LINE$tw_displayed_wd$BREAK_LINE$tw_env_prompt"
+      RPROMPT="$tw_git_arrow_info"
+    fi
+    
+    if [ "$tw_layout" = "singleline_split" ]; then
+      PROMPT="$tw_displayed_wd $tw_env_prompt"
+      RPROMPT="$tw_git_arrow_info"
+    fi
 
   zle -R && zle reset-prompt
 }

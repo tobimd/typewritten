@@ -263,6 +263,52 @@
         "bug",
         "ideas"
       ]
+    },
+    {
+      "login": "subhajit-halder",
+      "name": "awakened",
+      "avatar_url": "https://avatars.githubusercontent.com/u/54535412?v=4",
+      "profile": "https://github.com/subhajit-halder",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "spamwax",
+      "name": "spamwax",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1251233?v=4",
+      "profile": "https://github.com/spamwax",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "Austin-Ray",
+      "name": "Austin Ray",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1640737?v=4",
+      "profile": "https://austinray.io",
+      "contributions": [
+        "code",
+        "bug"
+      ]
+    },
+    {
+      "login": "Pound-Hash",
+      "name": "Alan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51193876?v=4",
+      "profile": "https://github.com/Pound-Hash",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "vedantnn71",
+      "name": "Vedant Nandwana",
+      "avatar_url": "https://avatars.githubusercontent.com/u/70624701?v=4",
+      "profile": "http://vedantnandwana.me",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
