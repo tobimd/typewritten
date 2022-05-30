@@ -50,6 +50,16 @@ if [ ! -z "$TYPEWRITTEN_ARROW_SYMBOL" ]; then
 fi;
 tw_arrow="%F{$tw_colors[arrow]}$tw_arrow_symbol"
 
+local tw_branch_left_symbol=" $tw_arrow "
+local tw_branch_right_symbol=""
+if [ ! -z "$TYPEWRITTEN_BRANCH_LEFT_SYMBOL" ]; then
+  tw_branch_left_symbol="%F{$tw_colors[git_enclosing_symbol]}$TYPEWRITTEN_BRANCH_LEFT_SYMBOL"
+fi;
+
+if [ ! -z "$TYPEWRITTEN_BRANCH_RIGHT_SYMBOL" ]; then
+  tw_branch_right_symbol="%F{$tw_colors[git_enclosing_symbol]}$TYPEWRITTEN_BRANCH_RIGHT_SYMBOL"
+fi;
+
 tw_get_virtual_env() {
   if [[ -z $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
     local tw_virtual_env=""
@@ -69,10 +79,24 @@ tw_get_displayed_wd() {
   local tw_git_branch=$tw_prompt_data[tw_git_branch]
   local tw_git_home=$tw_prompt_data[tw_git_home]
 
+    local tw_git_dir_prefix="git:"
+  if [ ! -z "$TYPEWRITTEN_GIT_DIR_PREFIX_TEXT" ]; then
+    tw_git_dir_prefix="$TYPEWRITTEN_GIT_DIR_PREFIX_TEXT"
+  fi;
+
+  if [ ! -z "$tw_git_dir_prefix" ]; then
+    tw_git_home="%F{$tw_colors[git_dir_prefix_text]}$tw_git_dir_prefix%F{$tw_colors[current_directory]}$tw_git_home" 
+  fi;
+  
   local tw_home_relative_wd="%~"
   local tw_git_relative_wd="$tw_git_home%c"
 
+  if [[ "$TYPEWRITTEN_SQUASH_GIT_DIRECTORIES" == "0" ]]; then
+      tw_git_relative_wd="$tw_git_home"
+  fi;
+
   local tw_displayed_wd="$tw_git_relative_wd"
+    
 
   # The pure layout defaults to home relative working directory, but allows customization
   if [[ "$TYPEWRITTEN_PROMPT_LAYOUT" = pure* && "$TYPEWRITTEN_RELATIVE_PATH" = "" ]]; then
@@ -99,14 +123,16 @@ tw_redraw() {
 
   tw_layout="$TYPEWRITTEN_PROMPT_LAYOUT"
   tw_git_info="$tw_prompt_data[tw_git_branch]$tw_prompt_data[tw_git_status]"
+
   if [ "$tw_layout" = "half_pure" ]; then
     PROMPT="$BREAK_LINE%F{$tw_git_branch_color}$tw_git_info$BREAK_LINE$tw_env_prompt"
     RPROMPT="$tw_right_prompt_prefix$tw_displayed_wd"
+
   else
     local tw_git_arrow_info=""
     if [ "$tw_git_info" != "" ]; then
-      tw_git_arrow_info=" $tw_arrow %F{$tw_git_branch_color}$tw_git_info"
-    fi;
+      tw_git_arrow_info="$tw_branch_left_symbol%F{$tw_git_branch_color}$tw_git_info$tw_branch_right_symbol"
+    fi
 
     PROMPT="$tw_env_prompt"
     RPROMPT="$tw_right_prompt_prefix$tw_displayed_wd$tw_git_arrow_info"
@@ -114,12 +140,12 @@ tw_redraw() {
     if [ "$tw_layout" = "pure" ]; then
       PROMPT="$BREAK_LINE$tw_displayed_wd$tw_git_arrow_info$BREAK_LINE$tw_env_prompt"
       RPROMPT=""
-    fi;
+    fi
 
     if [ "$tw_layout" = "pure_verbose" ]; then
       PROMPT="$BREAK_LINE$tw_user_host $tw_displayed_wd$tw_git_arrow_info$BREAK_LINE$tw_env_prompt"
       RPROMPT=""
-    fi;
+    fi
 
     if [ "$tw_layout" = "singleline_verbose" ]; then
       PROMPT="$tw_user_host $tw_env_prompt"
@@ -128,9 +154,17 @@ tw_redraw() {
 
     if [ "$tw_layout" = "multiline" ]; then
       PROMPT="$BREAK_LINE$tw_user_host$BREAK_LINE$tw_env_prompt"
-      RPROMPT="$tw_right_prompt_prefix$tw_displayed_wd$tw_git_arrow_info"
-    fi;
-  fi;
+    fi
+
+    if [ "$tw_layout" = "split" ]; then
+      PROMPT="$BREAK_LINE$tw_displayed_wd$BREAK_LINE$tw_env_prompt"
+      RPROMPT="$tw_git_arrow_info"
+    fi
+    
+    if [ "$tw_layout" = "singleline_split" ]; then
+      PROMPT="$tw_displayed_wd $tw_env_prompt"
+      RPROMPT="$tw_git_arrow_info"
+    fi
 
   zle -R && zle reset-prompt
 }
@@ -177,14 +211,23 @@ tw_async_init_tasks() {
 
     tw_prompt_data[tw_git_toplevel]="$tw_git_toplevel"
     tw_prompt_data[tw_current_pwd]="$tw_current_pwd"
+
     if [[ "$TYPEWRITTEN_RELATIVE_PATH" = "git" || "$TYPEWRITTEN_RELATIVE_PATH" = "adaptive" ]]; then
-      async_job tw_worker tw_git_home $tw_current_pwd $tw_git_toplevel
+
+      if [[ -z "$TYPEWRITTEN_SQUASH_GIT_DIRECTORIES" || "$TYPEWRITTEN_SQUASH_GIT_DIRECTORIES" != "0" ]]; then
+        async_job tw_worker tw_git_home $tw_current_pwd $tw_git_toplevel "1"
+      else
+        async_job tw_worker tw_git_home $tw_current_pwd $tw_git_toplevel "0"
+      fi;
     fi;
+
     async_job tw_worker tw_git_branch
     async_job tw_worker tw_git_status
+
   else
     tw_prompt_data[tw_git_branch]=
     tw_prompt_data[tw_git_status]=
+
   fi;
 
   tw_redraw

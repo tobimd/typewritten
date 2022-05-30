@@ -5,6 +5,17 @@ declare -Ag tw_color_mappings=(
   "notice" "yellow"
   "accent" "default"
 
+  "dark" "#555555"
+  "light" "#BFBFBF"
+
+  "red" "#c13e3e"
+  "orange" "#cc9145"
+  "yellow" "#d3ca4c"
+  "green" "#73c94e"
+  "cyan" "#3ec1c1"
+  "blue" "#3a76af"
+  "purple" "#6d378e"
+  "magenta" "#c942be"
 
   "info_positive" "green"
   "info_negative" "red"
@@ -53,6 +64,8 @@ declare -Ag tw_colors=(
   "git_status_behind" $tw_color_mappings[info_neutral_2]
   "git_status_renamed" $tw_color_mappings[info_special]
   "git_status_unmerged" $tw_color_mappings[info_special]
+  "git_enclosing_symbol" $tw_color_mappings[dark]
+  "git_dir_prefix_text" $tw_color_mappings[dark]
 )
 
 if [[ $TYPEWRITTEN_COLORS =~ ^[#_0-9a-zA-Z]+:[#_0-9a-zA-Z]+(\;[#_0-9a-zA-Z]+:[#_0-9a-zA-Z]+)*$ ]]; then
