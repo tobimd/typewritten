@@ -4,7 +4,6 @@ declare -Ag tw_color_mappings=(
   "secondary" "blue"
   "notice" "yellow"
   "accent" "default"
-
   "dark" "#555555"
   "light" "#BFBFBF"
 
@@ -43,6 +42,7 @@ declare -Ag tw_colors=(
 
   "arrow" $tw_color_mappings[accent]
   "right_prompt_prefix" $tw_color_mappings[accent]
+  "left_prompt_prefix" $tw_color_mappings[accent]
   "virtual_env" $tw_color_mappings[accent]
 
   "symbol_error" $tw_color_mappings[info_negative]

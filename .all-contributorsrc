@@ -309,6 +309,26 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "KEDLogic",
+      "name": "Kyle Dozier",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9738036?v=4",
+      "profile": "https://github.com/KEDLogic",
+      "contributions": [
+        "doc",
+        "ideas"
+      ]
+    },
+    {
+      "login": "danielbayley",
+      "name": "Daniel Bayley",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7797479?v=4",
+      "profile": "http://vimeo.com/danielbayley",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -316,5 +336,6 @@
   "projectOwner": "reobin",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }
