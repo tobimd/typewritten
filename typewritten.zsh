@@ -210,12 +210,12 @@ tw_redraw() {
     fi
 
     if [ "$tw_layout" = "split" ]; then
-      PROMPT="$BREAK_LINE$tw_displayed_wd$BREAK_LINE$tw_env_prompt"
+      PROMPT="$BREAK_LINE$tw_displayed_wd$BREAK_LINE$tw_full_prompt"
       RPROMPT="$tw_git_arrow_info"
     fi
     
     if [ "$tw_layout" = "singleline_split" ]; then
-      PROMPT="$tw_displayed_wd $tw_env_prompt"
+      PROMPT="$tw_displayed_wd $tw_full_prompt"
       RPROMPT="$tw_git_arrow_info"
     fi
   fi;
