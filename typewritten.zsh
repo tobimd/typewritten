@@ -120,7 +120,7 @@ tw_get_displayed_wd() {
     fi;
   fi;
 
-  echo "%F{$tw_current_directory_color}$tw_displayed_wd"
+  echo "$n%F{$tw_current_directory_color}$tw_displayed_wd"
 }
 
 tw_get_left_prompt_prefix() {
