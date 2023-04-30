@@ -120,6 +120,10 @@ tw_get_displayed_wd() {
     fi;
   fi;
 
+  n=""
+  if [[ -n "$NNNLVL" ]]; then
+    n="%F{$tw_colors[git_dir_prefix_text]}[n:${NNNLVL}] "
+  fi
   echo "$n%F{$tw_current_directory_color}$tw_displayed_wd"
 }
 
